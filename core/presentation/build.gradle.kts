@@ -24,6 +24,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     // For iOS targets, this is also where you should
     // configure native binary output. For more information, see:
     // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
@@ -60,13 +62,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
-            }
-        }
-
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
+                implementation(projects.core.domain)
             }
         }
 
@@ -78,13 +74,6 @@ kotlin {
             }
         }
 
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.junit)
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.test.core)
-            }
-        }
 
         iosMain {
             dependencies {
