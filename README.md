@@ -1,48 +1,67 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# Chirp
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Chirp is a multi-platform real-time messaging app for Android, iOS, and Desktop devices built with Kotlin Multiplatform and Compose Multiplatform.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+### Mobile View
+<div align="center">
+  <img width="800" alt="mobile-screens" src="https://github.com/user-attachments/assets/55ec2600-9ecb-4d5d-a8ad-1650dfe2dc17" />
+</div>
 
-### Build and Run Android Application
+### Desktop, Foldable & Tablet View
+<div align="center">
+  <img width="900" alt="tablet-chat" src="https://github.com/user-attachments/assets/df54ebfd-e7d7-4f14-9841-2abe75c630b3" />
+</div>
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## What's covered?
 
-### Build and Run Desktop (JVM) Application
+In this course, you will learn these concepts/technologies:
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+- Kotlin Multiplatform & Compose Multiplatform theory
+- Multi-module architecture for KMP projects
+- Gradle configuration for cross-platform development
+- Authentication (JWT token management)
+- Real-time messaging with WebSocket
+- Push notifications with Firebase
+- Room for local database
+- Desktop app development
+- Desktop, iOS and Android native integrations
+- Clean Architecture principles
 
-### Build and Run iOS Application
+## How do you run the project?
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+To run the project on your devices, you'll need to first clone it and then add your API key.
 
----
+Include it in `local.properties`:
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+```properties
+API_KEY=<YOUR_API_KEY>
+```
+
+### Firebase Setup
+
+**Android:** Place `google-services.json` in `androidApp/`
+
+**iOS:**
+- Add `GoogleService-Info.plist` to Xcode project
+- Install Firebase SDK via Swift Package Manager (FirebaseMessaging)
+
+Then build the project and you're ready to use it.
+
+## Technology Stack
+
+<table>
+  <tr>
+    <td align="center" width="120" height="120">
+      <img src="https://github.com/user-attachments/assets/59036eab-e126-41f7-bf3d-29185d67f3b1" width="60" height="60" alt="Kotlin Multiplatform" />
+      <br><strong>Kotlin</strong><br>Multiplatform
+    </td>
+    <td align="center" width="120" height="120">
+      <img src="https://github.com/user-attachments/assets/cb037308-f7cf-4f13-8c82-cecb9cba43a4" width="60" height="60" alt="Compose Multiplatform" />
+      <br><strong>Compose</strong><br>Multiplatform
+    </td>
+    <td align="center" width="120" height="120">
+      <img src="https://github.com/user-attachments/assets/3a3dfe68-5dec-4501-bde1-63afe6fdcb92" width="60" height="60" alt="Firebase" />
+      <br><strong>Firebase</strong>
+    </td>
+  </tr>
+</table>
