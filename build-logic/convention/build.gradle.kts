@@ -37,5 +37,9 @@ gradlePlugin {
             id = "com.github.orlandroyd.convention.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidComposeApplication") {
+            id = "com.github.orlandroyd.convention.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
     }
 }
