@@ -45,5 +45,9 @@ gradlePlugin {
             id = "com.github.orlandroyd.convention.cmp.application"
             implementationClass = "CmpApplicationConventionPlugin"
         }
+        register("kmpLibrary") {
+            id = "com.github.orlandroyd.convention.kmp.library"
+            implementationClass = "KmpLibraryConventionPlugin"
+        }
     }
 }
