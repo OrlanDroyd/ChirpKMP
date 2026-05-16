@@ -13,6 +13,14 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
+
+                implementation(projects.core.presentation)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.ktor)
+
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
             }
         }
 
