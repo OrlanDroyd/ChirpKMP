@@ -1,4 +1,4 @@
-package com.github.orlandroyd.auth.domain.util
+package com.github.orlandroyd.core.domain.util
 
 sealed interface Result<out D, out E : Error> {
     data class Success<out D>(val data: D) : Result<D, Nothing>

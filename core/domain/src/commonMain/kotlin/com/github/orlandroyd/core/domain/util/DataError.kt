@@ -1,4 +1,4 @@
-package com.github.orlandroyd.auth.domain.util
+package com.github.orlandroyd.core.domain.util
 
 sealed interface DataError : Error {
     enum class Remote : DataError {
