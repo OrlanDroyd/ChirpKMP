@@ -4,7 +4,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.plcoding.convention.buildlogic"
+group = "com.github.orlandroyd.convention.buildlogic"
 
 dependencies {
     compileOnly(libs.android.gradlePlugin)
@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.androidx.room.gradle.plugin)
     implementation(libs.buildkonfig.gradlePlugin)
     implementation(libs.buildkonfig.compiler)
 }
@@ -63,6 +64,10 @@ gradlePlugin {
         register("buildKonfig") {
             id = "com.github.orlandroyd.convention.buildkonfig"
             implementationClass = "BuildKonfigConventionPlugin"
+        }
+        register("room") {
+            id = "com.github.orlandroyd.convention.room"
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }
