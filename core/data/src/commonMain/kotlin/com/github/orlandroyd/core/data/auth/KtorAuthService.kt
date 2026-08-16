@@ -2,6 +2,7 @@ package com.github.orlandroyd.core.data.auth
 
 import com.github.orlandroyd.core.data.dto.requests.EmailRequest
 import com.github.orlandroyd.core.data.dto.requests.RegisterRequest
+import com.github.orlandroyd.core.data.networking.get
 import com.github.orlandroyd.core.data.networking.post
 import com.github.orlandroyd.core.domain.auth.AuthService
 import com.github.orlandroyd.core.domain.util.DataError
@@ -31,6 +32,13 @@ class KtorAuthService(
         return httpClient.post(
             route = "/auth/resend-verification",
             body = EmailRequest(email),
+        )
+    }
+
+    override suspend fun verifyEmail(token: String): EmptyResult<DataError.Remote> {
+        return httpClient.get(
+            route = "/auth/verify",
+            queryParams = mapOf("token" to token)
         )
     }
 }
