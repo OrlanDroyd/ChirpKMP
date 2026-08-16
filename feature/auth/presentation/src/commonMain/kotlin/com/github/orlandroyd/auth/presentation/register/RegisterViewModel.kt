@@ -1,4 +1,4 @@
-package com.github.orlandroyd.auth.presentation.register
+package com.plcoding.auth.presentation.register
 
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,9 @@ import chirp.feature.auth.presentation.generated.resources.error_invalid_email
 import chirp.feature.auth.presentation.generated.resources.error_invalid_password
 import chirp.feature.auth.presentation.generated.resources.error_invalid_username
 import com.github.orlandroyd.auth.domain.EmailValidator
+import com.github.orlandroyd.auth.presentation.register.RegisterAction
+import com.github.orlandroyd.auth.presentation.register.RegisterEvent
+import com.github.orlandroyd.auth.presentation.register.RegisterState
 import com.github.orlandroyd.core.domain.auth.AuthService
 import com.github.orlandroyd.core.domain.util.DataError
 import com.github.orlandroyd.core.domain.util.onFailure
@@ -64,16 +67,21 @@ class RegisterViewModel(
         .map { password -> PasswordValidator.validate(password).isValidPassword }
         .distinctUntilChanged()
 
+    private val isRegisteringFlow = state
+        .map { it.isRegistering }
+        .distinctUntilChanged()
+
     private fun observeValidationStates() {
         combine(
             isEmailValidFlow,
             isUsernameValidFlow,
-            isPasswordValidFlow
-        ) { isEmailValid, isUsernameValid, isPasswordValid ->
+            isPasswordValidFlow,
+            isRegisteringFlow
+        ) { isEmailValid, isUsernameValid, isPasswordValid, isRegistering ->
             val allValid = isEmailValid && isUsernameValid && isPasswordValid
             _state.update {
                 it.copy(
-                    canRegister = !it.isRegistering && allValid
+                    canRegister = !isRegistering && allValid
                 )
             }
         }.launchIn(viewModelScope)
@@ -96,14 +104,14 @@ class RegisterViewModel(
     }
 
     private fun register() {
-        if (validateFormInputs()) {
+        if (!validateFormInputs()) {
             return
         }
 
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    isRegistering = true
+                    isRegistering = true,
                 )
             }
 
@@ -120,7 +128,7 @@ class RegisterViewModel(
                 .onSuccess {
                     _state.update {
                         it.copy(
-                            isRegistering = false
+                            isRegistering = false,
                         )
                     }
                 }
@@ -132,7 +140,7 @@ class RegisterViewModel(
                     _state.update {
                         it.copy(
                             isRegistering = false,
-                            registrationError = registrationError
+                            registrationError = registrationError,
                         )
                     }
                 }
