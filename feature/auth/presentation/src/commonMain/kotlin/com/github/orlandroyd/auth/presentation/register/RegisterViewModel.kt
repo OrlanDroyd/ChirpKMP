@@ -1,4 +1,4 @@
-package com.plcoding.auth.presentation.register
+package com.github.orlandroyd.auth.presentation.register
 
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
@@ -9,9 +9,6 @@ import chirp.feature.auth.presentation.generated.resources.error_invalid_email
 import chirp.feature.auth.presentation.generated.resources.error_invalid_password
 import chirp.feature.auth.presentation.generated.resources.error_invalid_username
 import com.github.orlandroyd.auth.domain.EmailValidator
-import com.github.orlandroyd.auth.presentation.register.RegisterAction
-import com.github.orlandroyd.auth.presentation.register.RegisterEvent
-import com.github.orlandroyd.auth.presentation.register.RegisterState
 import com.github.orlandroyd.core.domain.auth.AuthService
 import com.github.orlandroyd.core.domain.util.DataError
 import com.github.orlandroyd.core.domain.util.onFailure

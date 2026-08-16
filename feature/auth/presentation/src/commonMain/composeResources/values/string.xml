@@ -2,6 +2,9 @@
 <resources>
     <string name="welcome_to_chirp">Welcome to Chirp!</string>
     <string name="username">Username</string>
+    <string name="account_successfully_created">Chirp account successfully created!</string>
+    <string name="verification_email_sent_to_x">Verification email sent to %1$s</string>
+    <string name="resend_verification_email">Resend verification email</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="register">Register</string>
