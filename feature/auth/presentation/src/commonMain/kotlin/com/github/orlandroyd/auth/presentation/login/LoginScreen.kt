@@ -29,6 +29,7 @@ import com.github.orlandroyd.core.designsystem.components.layouts.ChirpAdaptiveF
 import com.github.orlandroyd.core.designsystem.components.textfields.ChirpPasswordTextField
 import com.github.orlandroyd.core.designsystem.components.textfields.ChirpTextField
 import com.github.orlandroyd.core.designsystem.theme.ChirpTheme
+import com.github.orlandroyd.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -41,6 +42,12 @@ fun LoginRoot(
     onCreateAccountClick: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            LoginEvent.Success -> onLoginSuccess()
+        }
+    }
 
     LoginScreen(
         state = state,
