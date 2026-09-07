@@ -1,9 +1,11 @@
 package com.github.orlandroyd.core.data.di
 
+import com.github.orlandroyd.core.data.auth.DataStoreSessionStorage
 import com.github.orlandroyd.core.data.auth.KtorAuthService
 import com.github.orlandroyd.core.data.logging.KermitLogger
 import com.github.orlandroyd.core.data.networking.HttpClientFactory
 import com.github.orlandroyd.core.domain.auth.AuthService
+import com.github.orlandroyd.core.domain.auth.SessionStorage
 import com.github.orlandroyd.core.domain.logging.ChirpLogger
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -19,4 +21,5 @@ val coreDataModule = module {
         HttpClientFactory(get()).create(get())
     }
     singleOf(::KtorAuthService) bind AuthService::class
+    singleOf(::DataStoreSessionStorage) bind SessionStorage::class
 }
