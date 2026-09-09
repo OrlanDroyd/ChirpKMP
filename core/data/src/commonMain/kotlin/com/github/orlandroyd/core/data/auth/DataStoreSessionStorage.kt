@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.github.orlandroyd.core.data.dto.AuthInfoSerializable
+import com.github.orlandroyd.core.data.mappers.toDomain
 import com.github.orlandroyd.core.data.mappers.toSerializable
 import com.github.orlandroyd.core.domain.auth.AuthInfo
 import com.github.orlandroyd.core.domain.auth.SessionStorage
@@ -13,7 +15,7 @@ import kotlinx.serialization.json.Json
 
 class DataStoreSessionStorage(
     private val dataStore: DataStore<Preferences>
-) : SessionStorage {
+): SessionStorage {
 
     private val authInfoKey = stringPreferencesKey("KEY_AUTH_INFO")
 
@@ -25,13 +27,13 @@ class DataStoreSessionStorage(
         return dataStore.data.map { preferences ->
             val serializedJson = preferences[authInfoKey]
             serializedJson?.let {
-                json.decodeFromString(it)
+                json.decodeFromString<AuthInfoSerializable>(it).toDomain()
             }
         }
     }
 
     override suspend fun set(info: AuthInfo?) {
-        if (info == null) {
+        if(info == null) {
             dataStore.edit {
                 it.remove(authInfoKey)
             }
