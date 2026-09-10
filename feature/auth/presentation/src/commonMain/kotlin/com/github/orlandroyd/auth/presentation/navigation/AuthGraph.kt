@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.github.orlandroyd.auth.presentation.email_verification.EmailVerificationRoot
+import com.github.orlandroyd.auth.presentation.forgot_password.ForgotPasswordRoot
 import com.github.orlandroyd.auth.presentation.login.LoginRoot
 import com.github.orlandroyd.auth.presentation.register.RegisterRoot
 import com.github.orlandroyd.auth.presentation.register_success.RegisterSuccessRoot
@@ -86,7 +87,8 @@ fun NavGraphBuilder.authGraph(
                 }
             )
         }
+        composable<AuthGraphRoutes.ForgotPassword> {
+            ForgotPasswordRoot()
+        }
     }
 }
-
-// chirp://chirp.pl-coding.com/api/auth/verify?token=3HFmUQi8jU66OkrAdRFeotiPBw0GENd-8HpPkns_y_Q
