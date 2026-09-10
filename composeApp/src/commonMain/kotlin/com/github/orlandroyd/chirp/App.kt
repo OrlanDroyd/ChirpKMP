@@ -10,6 +10,7 @@ import com.github.orlandroyd.chat.presentattion.chat_list.ChatListRoute
 import com.github.orlandroyd.chirp.navigation.DeepLinkListener
 import com.github.orlandroyd.chirp.navigation.NavigationRoot
 import com.github.orlandroyd.core.designsystem.theme.ChirpTheme
+import com.github.orlandroyd.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -27,6 +28,18 @@ fun App(
     LaunchedEffect(state.isCheckingAuth) {
         if (!state.isCheckingAuth) {
             onAuthenticationChecked()
+        }
+    }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is MainEvent.OnSessionExpired -> {
+                navController.navigate(AuthGraphRoutes.Graph) {
+                    popUpTo(AuthGraphRoutes.Graph) {
+                        inclusive = false
+                    }
+                }
+            }
         }
     }
 
