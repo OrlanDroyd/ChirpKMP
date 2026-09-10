@@ -30,6 +30,7 @@ import com.github.orlandroyd.core.designsystem.components.brand.ChirpBrandLogo
 import com.github.orlandroyd.core.designsystem.theme.ChirpTheme
 import com.github.orlandroyd.core.designsystem.theme.extended
 import com.github.orlandroyd.core.presentation.util.DeviceConfiguration
+import com.github.orlandroyd.core.presentation.util.clearFocusOnTap
 import com.github.orlandroyd.core.presentation.util.currentDeviceConfiguration
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -52,6 +53,7 @@ fun ChirpAdaptiveFormLayout(
         DeviceConfiguration.MOBILE_PORTRAIT -> {
             ChirpSurface(
                 modifier = modifier
+                    .clearFocusOnTap()
                     .consumeWindowInsets(WindowInsets.navigationBars)
                     .consumeWindowInsets(WindowInsets.displayCutout),
                 header = {
