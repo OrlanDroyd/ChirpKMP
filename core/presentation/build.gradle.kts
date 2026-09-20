@@ -12,10 +12,12 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
+                // Add KMP dependencies here
 
                 implementation(projects.core.domain)
 
                 implementation(libs.material3.adaptive)
+                implementation(libs.bundles.koin.common)
 
                 implementation(compose.components.resources)
             }
