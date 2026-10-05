@@ -1,4 +1,4 @@
-package com.github.orlandroyd.chat.domain.model
+package com.github.orlandroyd.chat.domain.models
 
 import kotlin.time.Instant
 

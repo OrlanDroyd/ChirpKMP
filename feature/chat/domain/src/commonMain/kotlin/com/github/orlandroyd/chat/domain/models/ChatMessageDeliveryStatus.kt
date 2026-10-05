@@ -1,4 +1,4 @@
-package com.github.orlandroyd.chat.domain.model
+package com.github.orlandroyd.chat.domain.models
 
 enum class ChatMessageDeliveryStatus {
     SENDING,
