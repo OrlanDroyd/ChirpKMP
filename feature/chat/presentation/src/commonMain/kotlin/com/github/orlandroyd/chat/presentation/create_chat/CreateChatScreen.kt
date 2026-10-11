@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import chirp.feature.chat.presentation.generated.resources.Res
 import chirp.feature.chat.presentation.generated.resources.cancel
 import chirp.feature.chat.presentation.generated.resources.create_chat
+import com.github.orlandroyd.chat.domain.models.Chat
 import com.github.orlandroyd.chat.presentation.components.ChatParticipantSearchTextSection
 import com.github.orlandroyd.chat.presentation.components.ChatParticipantsSelectionSection
 import com.github.orlandroyd.chat.presentation.components.ManageChatButtonSection
@@ -32,6 +33,7 @@ import com.github.orlandroyd.core.designsystem.components.buttons.ChirpButtonSty
 import com.github.orlandroyd.core.designsystem.components.dialogs.ChirpAdaptiveDialogSheetLayout
 import com.github.orlandroyd.core.designsystem.theme.ChirpTheme
 import com.github.orlandroyd.core.presentation.util.DeviceConfiguration
+import com.github.orlandroyd.core.presentation.util.ObserveAsEvents
 import com.github.orlandroyd.core.presentation.util.clearFocusOnTap
 import com.github.orlandroyd.core.presentation.util.currentDeviceConfiguration
 import org.jetbrains.compose.resources.stringResource
@@ -41,9 +43,16 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun CreateChatRoot(
     onDismiss: () -> Unit,
+    onChatCreated: (Chat) -> Unit,
     viewModel: CreateChatViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is CreateChatEvent.OnChatCreated -> onChatCreated(event.chat)
+        }
+    }
 
     ChirpAdaptiveDialogSheetLayout(
         onDismiss = onDismiss
@@ -139,6 +148,7 @@ fun CreateChatScreen(
                     style = ChirpButtonStyle.SECONDARY
                 )
             },
+            error = state.createChatError?.asString(),
             modifier = Modifier.fillMaxWidth()
         )
     }
