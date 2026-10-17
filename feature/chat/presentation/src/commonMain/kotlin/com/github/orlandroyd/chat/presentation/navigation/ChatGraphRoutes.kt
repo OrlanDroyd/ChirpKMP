@@ -9,10 +9,10 @@ import kotlinx.serialization.Serializable
 
 sealed interface ChatGraphRoutes {
     @Serializable
-    data object Graph : ChatGraphRoutes
+    data object Graph: ChatGraphRoutes
 
     @Serializable
-    data object ChatListDetailRoute : ChatGraphRoutes
+    data object ChatListDetailRoute: ChatGraphRoutes
 }
 
 fun NavGraphBuilder.chatGraph(
@@ -22,7 +22,11 @@ fun NavGraphBuilder.chatGraph(
         startDestination = ChatGraphRoutes.ChatListDetailRoute
     ) {
         composable<ChatGraphRoutes.ChatListDetailRoute> {
-            ChatListDetailAdaptiveLayout()
+            ChatListDetailAdaptiveLayout(
+                onLogout = {
+                    // TODO: Logout user
+                }
+            )
         }
     }
 }
